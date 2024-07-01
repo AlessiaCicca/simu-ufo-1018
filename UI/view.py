@@ -8,7 +8,7 @@ class View(ft.UserControl):
         self._page = page
         self._page.title = "Template application using MVC and DAO"
         self._page.horizontal_alignment = 'CENTER'
-        self._page.theme_mode = ft.ThemeMode.DARK
+        self._page.theme_mode = ft.ThemeMode.LIGHT
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
         self._controller = None
         # graphical elements
@@ -20,20 +20,18 @@ class View(ft.UserControl):
 
     def load_interface(self):
         # title
-        self._title = ft.Text("Hello World", color="blue", size=24)
+        self._title = ft.Text("Simulazione Ufo", color="blue", size=24)
         self._page.controls.append(self._title)
 
         #ROW with some controls
         # text field for the name
-        self.txt_name = ft.TextField(
-            label="name",
-            width=200,
-            hint_text="Insert a your name"
-        )
-
+        self.dd_anno=ft.Dropdown(label="Anno", on_change=self._controller.fillDDforme)
+        self.dd_shape=ft.Dropdown(label="Shape")
+        self._controller.fillDDanno()
         # button for the "hello" reply
-        self.btn_hello = ft.ElevatedButton(text="Hello", on_click=self._controller.handle_hello)
-        row1 = ft.Row([self.txt_name, self.btn_hello],
+        self.btn_grafo = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handle_grafo)
+        self.btn_percorso = ft.ElevatedButton(text="Calcola Percorso", on_click=self._controller.handle_percorso)
+        row1 = ft.Row([self.dd_shape,self.dd_anno,self.btn_grafo,self.btn_percorso],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
 
